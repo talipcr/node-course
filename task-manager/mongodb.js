@@ -1,5 +1,4 @@
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+const { MongoClient, ObjectId } = require('mongodb');
 
 const connectionURL = 'mongodb://localhost:27017';
 const databaseName = 'task-manager';
@@ -8,47 +7,40 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true }, (err, client) => {
 	if (err) {
 		console.log('Error connecting to database: ' + err);
 	}
-	console.log('Connected to database: ' + connectionURL);
 	const db = client.db(databaseName);
 
-	// db.collection('users').insertOne(
+	console.log(`Connected to database ${databaseName}`);
+
+	const User = db.collection('users');
+	const Task = db.collection('tasks');
+
+	// User.updateOne(
+	// 	{ _id: new ObjectId('61128108c8e7277778de2d68') },
 	// 	{
-	// 		username: 'test',
-	// 		password: 'test',
-	// 		email: 'test',
-	// 	},
-	// 	(error, result) => {
-	// 		if (error) {
-	// 			console.log('Error inserting document into collection: ' + error);
-	// 		}
-
-	// 		console.log(result);
+	// 		$inc: {
+	// 			age: 1,
+	// 		},
 	// 	}
-	// );
+	// )
+	// 	.then(() => {
+	// 		console.log('User updated');
+	// 	})
+	// 	.catch((err) => {
+	// 		console.log(err);
+	// 	});
 
-	// db.collection('users').insertMany(
-	// 	[{ name: 'test1' }, { name: 'test2' }],
-	// 	(error, result) => {
-	// 		if (error) {
-	// 			console.log('Error inserting document into collection: ' + error);
-	// 		}
-
-	// 		console.log(result);
-	// 	}
-	// );
-
-	db.collection('tasks').insertMany(
-		[
-			{ description: 'test1', completed: true },
-			{ description: 'test2', completed: true },
-			{ description: 'test3', completed: false },
-		],
-		(error, result) => {
-			if (error) {
-				console.log('Error inserting document into collection: ' + error);
-			}
-
-			console.log(result);
+	Task.updateMany(
+		{},
+		{
+			$set: {
+				completed: true,
+			},
 		}
-	);
+	)
+		.then(() => {
+			console.log('Task updated');
+		})
+		.catch((err) => {
+			console.log(err);
+		});
 });
