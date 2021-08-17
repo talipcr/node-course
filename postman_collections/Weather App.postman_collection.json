@@ -1,0 +1,35 @@
+{
+	"info": {
+		"_postman_id": "a55ddbcc-049a-40ff-a88b-4cca322b691c",
+		"name": "Weather App",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Weather",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://mead-weather-application.herokuapp.com/weather?address=boston",
+					"protocol": "https",
+					"host": [
+						"mead-weather-application",
+						"herokuapp",
+						"com"
+					],
+					"path": [
+						"weather"
+					],
+					"query": [
+						{
+							"key": "address",
+							"value": "boston"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
