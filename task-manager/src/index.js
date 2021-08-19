@@ -21,8 +21,6 @@ const port = process.env.PORT || 3000;
 // });
 
 app.use(express.json());
-
-// ROUTES
 app.use(userRouter);
 app.use(taskRouter);
 
@@ -31,18 +29,17 @@ app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);
 });
 
-const jwt = require('jsonwebtoken');
+// const Task = require('./models/task');
+// const User = require('./models/user');
 
-const myFunction = async () => {
-	const token = jwt.sign({ _id: 'abc123' }, 'secret', {
-		expiresIn: '1h',
-	});
+// const main = async () => {
+// 	// const task = await Task.findById('611e5b49c1130c327aa4e7d7');
+// 	// await task.populate('owner').execPopulate();
+// 	// console.log(task.owner);
 
-	console.log(token);
+// 	const user = await User.findById('611e5a1bf7048331bb6ee40a');
+// 	await user.populate('tasks').execPopulate();
+// 	console.log(user.tasks);
+// };
 
-	jwt.verify(token, 'secret', (err, decoded) => {
-		console.log(decoded);
-	});
-};
-
-myFunction();
+// main();

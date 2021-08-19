@@ -10,12 +10,28 @@
 			"item": [
 				{
 					"name": "Create User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    pm.environment.set('token', pm.response.json().token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
 					"request": {
+						"auth": {
+							"type": "noauth"
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"Talip\",\n    \"email\": \"test@gmail.com\",\n    \"password\": \"Azerty1234\"\n}",
+							"raw": "{\n    \"name\": \"Talip\",\n    \"email\": \"test@gmail.com\",\n    \"password\": \"Azerty123\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -23,11 +39,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/users",
+							"raw": "{{url}}/users",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users"
 							]
@@ -36,11 +51,136 @@
 					"response": []
 				},
 				{
-					"name": "Read Users",
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"if (pm.response.code === 201) {",
+									"    pm.environment.set('token', pm.response.json().token)",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@gmail.com\",\n    \"password\": \"Azerty123\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout All User",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/users/logout/all",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"logout",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Read Profile",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -53,13 +193,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/users",
+							"raw": "{{url}}/users/me",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
-								"users"
+								"users",
+								"me"
 							]
 						}
 					},
@@ -71,6 +211,21 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -83,14 +238,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/users/611a269125ea8221ec824023",
+							"raw": "{{url}}/users/611d1a61e9b56350735f13fd",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
-								"611a269125ea8221ec824023"
+								"611d1a61e9b56350735f13fd"
 							]
 						}
 					},
@@ -99,6 +253,21 @@
 				{
 					"name": "Update User By Id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
@@ -111,14 +280,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/users/611a269125ea8221ec824023",
+							"raw": "{{url}}/users/me",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
-								"611a269125ea8221ec824023"
+								"me"
 							]
 						}
 					},
@@ -127,17 +295,31 @@
 				{
 					"name": "Delete User By Id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/users/611a269125ea8221ec824023",
+							"raw": "{{url}}/users/me",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"users",
-								"611a269125ea8221ec824023"
+								"me"
 							]
 						}
 					},
@@ -151,6 +333,21 @@
 				{
 					"name": "Create Task",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "POST",
 						"header": [],
 						"body": {
@@ -163,11 +360,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks",
+							"raw": "{{url}}/tasks",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"tasks"
 							]
@@ -181,6 +377,21 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -193,11 +404,10 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks",
+							"raw": "{{url}}/tasks",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"tasks"
 							]
@@ -211,6 +421,21 @@
 						"disableBodyPruning": true
 					},
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "GET",
 						"header": [],
 						"body": {
@@ -223,14 +448,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks/6113cc5a9be5a6817939ff39",
+							"raw": "{{url}}/tasks/611e6758647c6e37143bf577",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"tasks",
-								"6113cc5a9be5a6817939ff39"
+								"611e6758647c6e37143bf577"
 							]
 						}
 					},
@@ -239,11 +463,26 @@
 				{
 					"name": "Update Task By Id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "PATCH",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"completed\": true\n}",
+							"raw": "{\n    \"completed\": false\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -251,14 +490,13 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:3000/tasks/611a28158433792303a46ca0",
+							"raw": "{{url}}/tasks/611e6758647c6e37143bf577",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"tasks",
-								"611a28158433792303a46ca0"
+								"611e6758647c6e37143bf577"
 							]
 						}
 					},
@@ -267,17 +505,31 @@
 				{
 					"name": "Delete Task By Id",
 					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "localhost:3000/tasks/611a28158433792303a46ca0",
+							"raw": "{{url}}/tasks/611e5a1ef7048331bb6ee40f",
 							"host": [
-								"localhost"
+								"{{url}}"
 							],
-							"port": "3000",
 							"path": [
 								"tasks",
-								"611a28158433792303a46ca0"
+								"611e5a1ef7048331bb6ee40f"
 							]
 						}
 					},
