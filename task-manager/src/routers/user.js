@@ -54,7 +54,6 @@ router.post('/users/logout/all', auth, async (req, res) => {
 });
 
 router.get('/users/me', auth, async (req, res) => {
-	console.log(req.user);
 	res.send(req.user);
 });
 
@@ -82,7 +81,7 @@ router.patch('/users/me', auth, async (req, res) => {
 router.delete('/users/me', auth, async (req, res) => {
 	try {
 		await req.user.remove();
-		res.status(200).send('User deleted');
+		res.status(200).send(req.user);
 	} catch (err) {
 		res.status(500).send(err);
 	}
