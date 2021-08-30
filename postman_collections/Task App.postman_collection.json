@@ -352,7 +352,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"description\": \"My task\"\n}",
+							"raw": "{\n    \"description\": \"My task\",\n    \"completed\": true\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -404,12 +404,26 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/tasks",
+							"raw": "{{url}}/tasks?completed=true&limit=5&skip=8",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"tasks"
+							],
+							"query": [
+								{
+									"key": "completed",
+									"value": "true"
+								},
+								{
+									"key": "limit",
+									"value": "5"
+								},
+								{
+									"key": "skip",
+									"value": "8"
+								}
 							]
 						}
 					},
