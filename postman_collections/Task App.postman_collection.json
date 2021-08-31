@@ -324,6 +324,93 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Upload avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "avatar",
+									"type": "file",
+									"src": "/Users/talip/Downloads/node-course-images/profile-pic.jpg"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/users/me/avatar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me",
+								"avatar"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete avatar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{token}}",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "{{token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/users/me/avatar",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"users",
+								"me",
+								"avatar"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -404,7 +491,7 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/tasks?completed=true&limit=5&skip=8",
+							"raw": "{{url}}/tasks?sortBy=desc",
 							"host": [
 								"{{url}}"
 							],
@@ -413,16 +500,8 @@
 							],
 							"query": [
 								{
-									"key": "completed",
-									"value": "true"
-								},
-								{
-									"key": "limit",
-									"value": "5"
-								},
-								{
-									"key": "skip",
-									"value": "8"
+									"key": "sortBy",
+									"value": "desc"
 								}
 							]
 						}
