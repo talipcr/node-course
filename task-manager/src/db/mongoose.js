@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/task-manager-api', {
+mongoose.connect(process.env.MONGO_URI, {
 	useNewUrlParser: true,
 	useCreateIndex: true,
 	useFindAndModify: false,
