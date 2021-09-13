@@ -15,5 +15,5 @@ app.route('/').get((req, res) => {
 });
 
 app.listen(port, () => {
-	console.log(`Server listening on port ${port}`);
+	console.log('Server is up on port ' + port);
 });
