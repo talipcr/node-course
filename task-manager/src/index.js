@@ -10,6 +10,10 @@ app.use(express.json());
 app.use(userRouter);
 app.use(taskRouter);
 
+app.route('/').get((req, res) => {
+	res.send('Welcome to Task App!');
+});
+
 app.listen(port, () => {
 	console.log(`Server listening on port ${port}`);
 });
